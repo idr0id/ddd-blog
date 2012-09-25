@@ -1,0 +1,13 @@
+{% extends 'BlogFrontendBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+
+    <h1>Welcome!</h1>
+
+    <p>Congratulations! You have successfully installed a new Symfony application.</p>
+{% endblock %}

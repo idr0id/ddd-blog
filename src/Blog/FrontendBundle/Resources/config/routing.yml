@@ -1,0 +1,3 @@
+index:
+    pattern: /
+    defaults: { _controller: BlogFrontendBundle:Index:index }

@@ -1,0 +1,23 @@
+imports:
+    - { resource: config_dev.yml }
+
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        path:     :memory:
+        memory:   true
+    orm:
+        auto_generate_proxy_classes: true
+        auto_mapping: true
+
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+
+web_profiler:
+    toolbar: false
+    intercept_redirects: false
+
+swiftmailer:
+    disable_delivery: true

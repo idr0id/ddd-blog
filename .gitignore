@@ -1,3 +1,6 @@
+# IDE
+.idea/*
+
 # Bootstrap
 app/bootstrap*
 
@@ -9,4 +12,4 @@ web/uploads/*
 web/bundles/*
 
 # Configuration files
-app/config/parameters.ini
+app/config/parameters.yml
