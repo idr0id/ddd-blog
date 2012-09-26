@@ -32,7 +32,7 @@ class UserTest extends BaseTestCase
 
     public function testRemovePost()
     {
-        $post = new Post($this->user, 'some text');
+        $post = new Post($this->user, 'some title', 'some text');
 
         $this->user->removePost($post);
 

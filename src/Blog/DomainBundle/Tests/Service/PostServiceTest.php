@@ -4,6 +4,8 @@ namespace Blog\DomainBundle\Tests\Service;
 
 use Blog\DomainBundle\Service\PostService;
 use Blog\DomainBundle\Tests\BaseTestCase;
+use Doctrine\ORM\PersistentCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class PostServiceTest extends BaseTestCase
 {
@@ -20,13 +22,16 @@ class PostServiceTest extends BaseTestCase
     public function testCreate()
     {
         $user = $this->getEntityFixtureManager()->getUser();
-        $text = "Some text of post";
+        $title = 'Some text of title';
+        $text = 'Some text of post';
 
-        $post = $this->service->create($user, $text);
+        $post = $this->service->create($user, $title, $text);
 
         $this->assertInstanceOf('Blog\DomainBundle\Entity\Post', $post);
+        $this->assertInstanceOf('DateTime', $post->getCreated());
         $this->assertGreaterThan(0, $post->getId());
         $this->assertEquals($user, $post->getAuthor());
+        $this->assertEquals($title, $post->getTitle());
         $this->assertEquals($text, $post->getText());
         $this->assertEquals($post, $user->getPosts()->get(0));
     }
@@ -34,7 +39,7 @@ class PostServiceTest extends BaseTestCase
     public function testRemove()
     {
         $user = $this->getEntityFixtureManager()->getUser();
-        $post = $this->service->create($user, "Some text of post");
+        $post = $this->service->create($user, 'Some text of title', 'Some text of post');
 
         $this->service->remove($post->getId());
 
@@ -48,5 +53,15 @@ class PostServiceTest extends BaseTestCase
             'Post "100500" does not exist'
         );
         $this->service->remove(100500);
+    }
+
+    public function testGetAllPosts()
+    {
+        $expectedPosts = $this->getEntityFixtureManager()->getAllPosts();
+
+        $posts = $this->service->getAllPosts();
+
+        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $posts);
+        $this->assertEquals($expectedPosts, $posts->getValues());
     }
 }

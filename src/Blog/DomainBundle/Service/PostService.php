@@ -8,9 +8,9 @@ use Blog\DomainBundle\Exception\DomainException;
 
 class PostService extends BaseService
 {
-    public function create(User $user, $text)
+    public function create(User $user, $title, $text)
     {
-        $post = new Post($user, $text);
+        $post = new Post($user, $title, $text);
 
         $this->persist($post)->flush();
         return $post;
@@ -27,5 +27,10 @@ class PostService extends BaseService
         $post->getAuthor()->removePost($post);
 
         $this->persist($post)->flush();
+    }
+
+    public function getAllPosts()
+    {
+        return $this->getQueryFactory()->findAllPosts();
     }
 }

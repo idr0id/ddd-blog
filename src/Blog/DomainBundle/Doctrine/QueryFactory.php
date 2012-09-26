@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 /**
  * @method \Blog\DomainBundle\Entity\User findUserByLogin($login)
  * @method \Blog\DomainBundle\Entity\Post findPostById($id)
+ * @method \Doctrine\Common\Collections\ArrayCollection|\Blog\DomainBundle\Entity\Post[] findAllPosts()
  */
 class QueryFactory
 {

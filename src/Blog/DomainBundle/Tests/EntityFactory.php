@@ -14,6 +14,6 @@ class EntityFactory
 
     public static function createPost()
     {
-        return new Post(static::createUser(), 'It is test text');
+        return new Post(static::createUser(), 'It is test title', 'It is test text');
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Blog\DomainBundle\Tests;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
+
 abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
 {
     private $environment;
@@ -36,8 +38,11 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
     {
         if ($this->entityFixtureManager === null) {
             /** @var $queryFactory \Blog\DomainBundle\Doctrine\QueryFactory */
-            $queryFactory = $this->get("domain.doctrine.queryFactory");
-            $this->entityFixtureManager = new EntityFixtureManager($queryFactory);
+            $queryFactory = $this->get('domain.doctrine.queryFactory');
+            /** @var $doctrine Registry */
+            $doctrine = $this->get('doctrine');
+
+            $this->entityFixtureManager = new EntityFixtureManager($queryFactory, $doctrine);
         }
         return $this->entityFixtureManager;
     }
