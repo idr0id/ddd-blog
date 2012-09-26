@@ -1,0 +1,98 @@
+@CHARSET "UTF-8";
+
+/* Resets */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+body, html {color: #333; background: #fbfbfb; font: 14px/21px Georgia, "Trebuchet MS", Arial, Helvetica, sans-serif;}
+
+a {color: #5369D0;}
+a:hover {color: #600000;}
+
+h2, h3 {font-size: 18px; text-shadow: 1px 0px 0px #fff; margin: 12px 0;}
+h3 {margin: 15px 0;}
+
+.spacer {clear: both;}
+
+#page {width: 995px; margin: auto;}
+
+#header {width: 100%; height: 80px;}
+	#header .logo {margin: 10px 0; float: left;}
+	#header .social {float: right; margin: 24px 0;}
+		#header .social a {display: block; float: left; width: 32px; height: 32px; opacity: 0.5; margin-left: 8px;}
+		#header .social a:hover {opacity: 1;}
+		#header .social .rss {background: url('../images/social/rss.png');}
+		#header .social .jabber {background: url('../images/social/jabber.png');}
+		#header .social .twitter {background: url('../images/social/twitter.png');}
+		#header .social .facebook {background: url('../images/social/facebook.png');}
+		#header .social .vkontakte {background: url('../images/social/vkontakte.png');}
+		#header .social .youtube {background: url('../images/social/youtube.png');}
+
+#menu {width: 100%; padding: 0; background: #fefefe; border: 1px solid #e0e0e0; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}
+#menu ul {padding: 9px 0; margin: 0;}
+#menu li {display: inline; padding: 0; margin: 0 -3px 0 0;}
+#menu li.first a {padding: 12px; border-radius: 5px 0 0 5px; -moz-border-radius: 5px 0 0 5px; -webkit-border-radius: 5px 0 0 5px;}
+#menu a {font-weight: bold; padding: 12px}
+#menu li.active a {color: #000;}
+#menu a:hover {background: #e0e0e0;}
+
+#footer {color: #c9c9c9; margin-top: 50px;}
+#footer .logo {margin: 10px 0;}
+
+#content {margin: 15px 0 10px 0; padding: 0;}
+	#content .left-column {width: 650px; float: left;}
+	#content .right-column {width: 330px; float: right;}
+
+.page {}
+	.page .h1 {margin: 0px;}
+
+.post {margin: 0 0 20px 0; padding: 15px; background: #ffffff; border:1px solid #e0e0e0; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}
+.post .author {padding: 0px; margin: 0; color: #999; font-size: 12px;}
+.post .title {}
+	.post .title h1, .post .title h2 {margin: 0px;}
+	.post .title a {padding: 3px; margin: -3px; color: #5469A0; font-size: 23px; line-height: 32px;}
+	.post .title a:hover {color: #333; background: #f2f2c3;}
+.post .content {margin: 15px 0;}
+	.post .content h2 {margin: 20px 0; font-size: 17px; font-weight: bold;}
+	.post .content h3 {margin: 20px 0; font-size: 15px; font-weight: bold;}
+	.post .content strong {font-weight: bold;}
+	.post .content .hl-code, .post .content pre {margin: 15px 0; padding: 5px; background: #fafafa; border: 1px solid #eee;}
+	.post .content .hl-code pre {margin: 0; padding: 0; background: none; border: none;}
+	.post .content em {font-style:italic;}
+	.post .content p {margin-top:10px;}
+.post .nav {padding: 15px 0 0 0; border-top: 1px dotted #ccc;}
+	.post .nav img {margin: -2px 2px; padding: 0;}
+
+.comment-wrapper {background: url('../images/comment-border.gif') no-repeat 10px 22px;}
+.comment {margin: 0 0 10px 17px; padding: 8px 12px; background: #ffffff; border:1px solid #e0e0e0; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}
+.comment-even {background: #fffff6;}
+.comment-odd {background: #ffffff;}
+.comment .avatar {float: left; padding-right: 10px;}
+.comment .cid {float: right;}
+.comment .author {}
+.comment .time {font-size: 11px;}
+.comment .content {margin-top: 8px;}
+	.comment .content h2 {margin: 20px 0; font-size: 17px; font-weight: bold;}
+	.comment .content h3 {margin: 20px 0; font-size: 15px; font-weight: bold;}
+	.comment .content strong {font-weight: bold;}
+	.comment .content .hl-code, .comment .content pre {margin: 15px 0; padding: 5px; background: #fafafa; border: 1px solid #eee;}
+	.comment .content .hl-code pre {margin: 0; padding: 0; background: none; border: none;}
+
+.markItUpPreviewFrame {border: 1px solid #e0e0e0;}
+#comment-form .markItUpEditor {height: 120px;}
+
+#twitter-box ul {list-style: none;}
+#twitter-box ul li {padding: 2px; margin-bottom: 2px; background:#fff; border-bottom:1px dotted #999999;}
+#twitter-box ul li a {text-decoration: none;}
+#twitter-box ul li a:hover {text-decoration: underline;}
+#twitter-box ul li span {display:block; color: #000;}
+#twitter-box ul li span a {}

@@ -1,3 +1,7 @@
 index:
     pattern: /
-    defaults: { _controller: BlogFrontendBundle:Index:index }
+    defaults: { _controller: BlogFrontendBundle:Post:index }
+
+post.view:
+    pattern: /post/{id}/
+    defaults: { _controller: BlogFrontendBundle:Post:view }

@@ -1,0 +1,22 @@
+{% extends 'BlogFrontendBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <div class="post box">
+        <div class="title">
+            <h2><a href="{{ path('post.view', {id: post.id}) }}">{{ post.title }}</a></h2>
+        </div>
+        <div class="author">
+            Написан {{ post.created|date('d M Y H:i') }}
+        </div>
+        <div class="content">
+            {{ post.text }}
+        </div>
+        <div class="nav">
+            {{ post.author.login }}
+        </div>
+    </div>
+{% endblock %}

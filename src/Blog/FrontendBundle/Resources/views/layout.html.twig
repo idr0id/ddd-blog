@@ -4,19 +4,65 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Demo Bundle{% endblock %}</title>
         <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
-        <link rel="stylesheet" href="{{ asset('bundles/Blogfrontend/css/demo.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Blogfrontend/css/style.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/Blogfrontend/css/form.css') }}" />
+        <link rel="alternate" type="application/rss+xml" title="dr0id.ru" href="http://dr0id.ru/rss"/>
+
+        {% block googleAnalytics %}
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-22478245-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        {% endblock %}
     </head>
     <body>
-        <div id="symfony-wrapper">
-            <div id="symfony-header">
-                <a href="{{ path('index') }}">
-                    <img src="{{ asset('bundles/Blogfrontend/images/logo.gif') }}" alt="Symfony logo" />
-                </a>
-            </div>
+        <div id="page">
+            <div id="header">
+                <div class="logo">
+                    <a href="<?php echo Yii::app()->createAbsoluteUrl('/') ?>">
+                        <img alt="&lt;?php App::start('dr0id.ru')" src="{{ asset('bundles/Blogfrontend/images/logo.gif') }}" />
+                    </a>
+                </div>
+                <div class="social">
+                    <a class="rss" href="<?php echo Yii::app()->createAbsoluteUrl('rss/posts') ?>"></a>
+                    <a class="jabber" href="xmpp://dr0id@dr0id.ru"></a>
+                    <a class="twitter" href="http://twitter.com/idr0id"></a>
+                    <a class="facebook" href="http://www.facebook.com/profile.php?id=100000731243782"></a>
+                    <a class="vkontakte" href="http://vkontakte.ru/id2554441"></a>
+                    <a class="youtube" href="http://www.youtube.com/user/VladimirKomissarov"></a>
+                </div>
+                <div class="spacer"></div>
+            </div><!-- mainmenu -->
 
-            <div class="symfony-content">
+            {#<div id="menu">#}
+                {#<?php $this->widget('zii.widgets.CMenu',array(
+                'items'=>array(
+                array('label'=>'Главная', 'url'=>array('post/index'), 'htmlOptions'=>array('class'=>'first')),
+                array('label'=>'Об авторе', 'url'=>array('/site/page', 'view'=>'about')),
+                array('label'=>'Посты', 'url'=>array('post/admin'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Новый пост', 'url'=>array('post/create'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Комменты', 'url'=>array('comment/index'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Выход ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+                ),
+                'firstItemCssClass'=>'first',
+                'activeCssClass'=>'active',
+                )); ?>#}
+            {#</div>#}
+
+            <div id="content">
                 {% block content %}
                 {% endblock %}
+            </div>
+
+            <div id="footer">
+                <div>Copyright © 2008&#151;2012, Владимир Комиссаров.</div>
+                <div class="logo"><a href="/"><img alt="?&gt;" src="{{ asset('bundles/Blogfrontend/images/logo-footer.gif') }}"></a></div>
             </div>
         </div>
     </body>
