@@ -64,4 +64,13 @@ class PostServiceTest extends BaseTestCase
         $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $posts);
         $this->assertEquals($expectedPosts, $posts->getValues());
     }
+
+    public function testGetPostById()
+    {
+        $expectedPosts = $this->getEntityFixtureManager()->getAllPosts();
+
+        $post = $this->service->getPost($expectedPosts[0]->getId());
+
+        $this->assertEquals($expectedPosts[0], $post);
+    }
 }

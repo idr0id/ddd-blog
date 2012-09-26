@@ -8,6 +8,7 @@ use Blog\DomainBundle\Exception\DomainException;
 
 class PostService extends BaseService
 {
+    //<editor-fold desc="Domain">
     public function create(User $user, $title, $text)
     {
         $post = new Post($user, $title, $text);
@@ -18,7 +19,7 @@ class PostService extends BaseService
 
     public function remove($id)
     {
-        $post = $this->getQueryFactory()->findPostById($id);
+        $post = $this->getPost($id);
 
         if ($post === null) {
             throw new DomainException(sprintf('Post "%s" does not exist', $id));
@@ -28,9 +29,17 @@ class PostService extends BaseService
 
         $this->persist($post)->flush();
     }
+    //</editor-fold>
+
+    //<editor-fold desc="Repository">
+    public function getPost($id)
+    {
+        return $this->getQueryFactory()->findPostById($id);
+    }
 
     public function getAllPosts()
     {
         return $this->getQueryFactory()->findAllPosts();
     }
+    //</editor-fold>
 }

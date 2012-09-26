@@ -3,6 +3,7 @@
 namespace Blog\DomainBundle\Tests;
 
 use Blog\DomainBundle\Doctrine\QueryFactory;
+use Blog\DomainBundle\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
 class EntityFixtureManager
@@ -25,6 +26,9 @@ class EntityFixtureManager
         return $this->queryFactory->findUserByLogin('PostTester');
     }
 
+    /**
+     * @return Post[]
+     */
     public function getAllPosts()
     {
         return $this->doctrine->getRepository('Blog\DomainBundle\Entity\Post')->findAll();
