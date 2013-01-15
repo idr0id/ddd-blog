@@ -2,19 +2,39 @@
 
 namespace Blog\DomainBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Blog\DomainBundle\Exception\DomainException;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
 class User
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
+     */
     private $id;
 
+    /**
+     * @ORM\Column(type="string", length=64)
+     * @var string
+     */
     private $login;
 
+    /**
+     * @ORM\Column(type="string", length=64)
+     * @var string
+     */
     private $passwordHash;
 
     /**
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="author", cascade={"persist", "remove"})
      * @var ArrayCollection|PersistentCollection|Post[]
      */
     private $posts;

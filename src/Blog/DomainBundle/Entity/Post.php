@@ -2,20 +2,43 @@
 
 namespace Blog\DomainBundle\Entity;
 
-use DateTime;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="post")
+ */
 class Post
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
+     */
     private $id;
 
-    /** @var User */
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
+     * @var User
+     */
     private $author;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
     private $title;
 
+    /**
+     * @ORM\Column(type="text")
+     * @var string
+     */
     private $text;
 
-    /** @var \DateTime */
+    /**
+     * @var \DateTime
+     */
     private $created;
 
     public function __construct(User $author, $title, $text)
@@ -23,7 +46,7 @@ class Post
         $this->setAuthor($author)
             ->setTitle($title)
             ->setText($text)
-            ->setCreated(new DateTime());
+            ->setCreated(new \DateTime());
     }
 
     //<editor-fold desc="gets/sets">
@@ -71,7 +94,7 @@ class Post
         return $this->created;
     }
 
-    public function setCreated(DateTime $created)
+    public function setCreated(\DateTime $created)
     {
         $this->created = $created;
         return $this;
