@@ -3,11 +3,18 @@
 namespace Blog\DomainBundle\Tests;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Monolog\Logger;
 
 abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var TestsEnvironment
+     */
     private $environment;
 
+    /**
+     * @var EntityFixtureManager
+     */
     private $entityFixtureManager;
 
     public function __construct($name = null, array $data = array(), $dataName = '')
@@ -34,16 +41,48 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
         return $this->environment->getContainer()->get($service);
     }
 
+    /**
+     * Returns entity fixture manager
+     *
+     * @return EntityFixtureManager
+     */
     protected function getEntityFixtureManager()
     {
         if ($this->entityFixtureManager === null) {
-            /** @var $queryFactory \Blog\DomainBundle\Doctrine\QueryFactory */
-            $queryFactory = $this->get('domain.doctrine.queryFactory');
-            /** @var $doctrine Registry */
-            $doctrine = $this->get('doctrine');
-
-            $this->entityFixtureManager = new EntityFixtureManager($queryFactory, $doctrine);
+            $this->entityFixtureManager = new EntityFixtureManager($this->getQueryFactory(), $this->getDoctrine());
         }
         return $this->entityFixtureManager;
+    }
+
+    /**
+     * Returns query factory
+     *
+     * @return \Blog\DomainBundle\Doctrine\QueryFactory
+     */
+    protected function getQueryFactory()
+    {
+        $queryFactory = $this->get('blog.domain.doctrine.queryFactory');
+
+        return $queryFactory;
+    }
+
+    /**
+     * Returns doctrine
+     *
+     * @return Registry
+     */
+    protected function getDoctrine()
+    {
+        return $this->get('doctrine');
+    }
+
+    /**
+     * Returns logger
+     *
+     * @return Logger
+     */
+    protected function getLogger()
+    {
+        return new Logger('test');
     }
 }

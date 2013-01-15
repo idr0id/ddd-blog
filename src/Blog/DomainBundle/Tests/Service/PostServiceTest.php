@@ -16,7 +16,7 @@ class PostServiceTest extends BaseTestCase
 
     protected function setUp()
     {
-        $this->service = $this->get('domain.service.post');
+        $this->service = new PostService($this->getDoctrine(), $this->getQueryFactory(), $this->getLogger());
     }
 
     public function testCreate()

@@ -16,7 +16,7 @@ class UserServiceTest extends BaseTestCase
 
     protected function setUp()
     {
-        $this->service = $this->get('domain.service.user');
+        $this->service = new UserService($this->getDoctrine(), $this->getQueryFactory(), $this->getLogger());
     }
 
     public function testRegisterNewUserShouldBeSuccess()

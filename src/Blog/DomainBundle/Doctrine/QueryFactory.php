@@ -2,15 +2,21 @@
 
 namespace Blog\DomainBundle\Doctrine;
 
+use Blog\DomainBundle\Entity\Post;
+use Blog\DomainBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
 /**
- * @method \Blog\DomainBundle\Entity\User findUserByLogin($login)
- * @method \Blog\DomainBundle\Entity\Post findPostById($id)
- * @method \Doctrine\Common\Collections\ArrayCollection|\Blog\DomainBundle\Entity\Post[] findAllPosts()
+ * @method User findUserByLogin($login)
+ * @method Post findPostById($id)
+ * @method ArrayCollection|Post[] findAllPosts()
  */
 class QueryFactory
 {
+    /**
+     * @var Registry
+     */
     private $doctrine;
 
     public function __construct(Registry $doctrine)

@@ -1,15 +1,12 @@
-parameters:
-#    blog_domain.example.class: Blog\DomainBundle\Example
-
 services:
-    domain.doctrine.queryFactory:
+    blog.domain.doctrine.queryFactory:
         class: Blog\DomainBundle\Doctrine\QueryFactory
         arguments: [@doctrine]
 
-    domain.service.user:
+    blog.domain.service.user:
         class: Blog\DomainBundle\Service\UserService
-        arguments: [@doctrine, @domain.doctrine.queryFactory, @logger]
+        arguments: [@doctrine, @blog.domain.doctrine.queryFactory, @logger]
 
-    domain.service.post:
+    blog.domain.service.post:
             class: Blog\DomainBundle\Service\PostService
-            arguments: [@doctrine, @domain.doctrine.queryFactory, @logger]
+            arguments: [@doctrine, @blog.domain.doctrine.queryFactory, @logger]

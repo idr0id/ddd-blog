@@ -14,9 +14,7 @@ class QueryFactoryTest extends BaseTestCase
 
     protected function setUp()
     {
-        /** @var $doctrine Registry */
-        $doctrine = $this->get('doctrine');
-        $this->queryFactory = new QueryFactory($doctrine);
+        $this->queryFactory = new QueryFactory($this->getDoctrine());
     }
 
     public function testFindUserByLogin()
