@@ -1,6 +1,8 @@
 DDD Blog
 ========
 
+[![Build Status](https://travis-ci.org/idr0id/ddd-blog.png)](https://travis-ci.org/idr0id/ddd-blog)
+
 This blog written on Symfony2 framework with using TDD and DDD principles.
 
 Installing
