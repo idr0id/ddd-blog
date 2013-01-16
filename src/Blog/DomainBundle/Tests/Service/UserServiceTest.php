@@ -2,8 +2,6 @@
 
 namespace Blog\DomainBundle\Tests\Service;
 
-use Blog\DomainBundle\Entity\User;
-use Blog\DomainBundle\Doctrine\Queries\FindUserByLoginQuery;
 use Blog\DomainBundle\Service\UserService;
 use Blog\DomainBundle\Tests\BaseTestCase;
 

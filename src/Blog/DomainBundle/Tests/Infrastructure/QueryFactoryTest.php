@@ -1,9 +1,9 @@
 <?php
 
-namespace Blog\DomainBundle\Tests;
+namespace Blog\DomainBundle\Tests\Infrastructure;
 
 use Blog\DomainBundle\Doctrine\QueryFactory;
-use Doctrine\Bundle\DoctrineBundle\Registry;
+use Blog\DomainBundle\Tests\BaseTestCase;
 
 class QueryFactoryTest extends BaseTestCase
 {

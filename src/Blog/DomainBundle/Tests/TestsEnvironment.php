@@ -2,6 +2,7 @@
 
 namespace Blog\DomainBundle\Tests;
 
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -14,11 +15,14 @@ class TestsEnvironment
     private $runSilent;
     private $output;
 
+    /**
+     * @return TestsEnvironment
+     */
     public static function getInstance()
     {
         static $instance;
         if ($instance === null) {
-            $instance = new static();
+            $instance = new self();
         }
         return $instance;
     }
@@ -76,7 +80,7 @@ class TestsEnvironment
 
     private function buildApplication(\AppKernel $kernel)
     {
-        $application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
+        $application = new Application($kernel);
         $application->setAutoExit(false);
         return $application;
     }

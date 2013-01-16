@@ -2,8 +2,6 @@
 
 namespace Blog\DomainBundle\Tests\Entity;
 
-use Blog\DomainBundle\Entity\User;
-use Blog\DomainBundle\Entity\Post;
 use Blog\DomainBundle\Tests\EntityFactory;
 use Blog\DomainBundle\Tests\BaseTestCase;
 

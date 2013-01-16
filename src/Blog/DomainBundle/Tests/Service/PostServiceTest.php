@@ -4,8 +4,6 @@ namespace Blog\DomainBundle\Tests\Service;
 
 use Blog\DomainBundle\Service\PostService;
 use Blog\DomainBundle\Tests\BaseTestCase;
-use Doctrine\ORM\PersistentCollection;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class PostServiceTest extends BaseTestCase
 {

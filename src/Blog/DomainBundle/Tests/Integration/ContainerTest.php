@@ -6,7 +6,7 @@ use Blog\DomainBundle\Tests\BaseTestCase;
 
 class ContainerTest extends BaseTestCase
 {
-    public function testDoctrineQueryFactory()
+    public function testContains_DoctrineQueryFactory()
     {
         $this->assertInstanceOf(
             'Blog\DomainBundle\Doctrine\QueryFactory',
@@ -14,7 +14,7 @@ class ContainerTest extends BaseTestCase
         );
     }
 
-    public function testServiceUser()
+    public function testContains_UserService()
     {
         $this->assertInstanceOf(
             'Blog\DomainBundle\Service\UserService',
@@ -22,7 +22,7 @@ class ContainerTest extends BaseTestCase
         );
     }
 
-    public function testServicePost()
+    public function testContains_PostService()
     {
         $this->assertInstanceOf(
             'Blog\DomainBundle\Service\PostService',
