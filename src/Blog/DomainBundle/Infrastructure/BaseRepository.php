@@ -10,4 +10,9 @@ class BaseRepository extends EntityRepository
 	{
 		return $this->findBy($specification->isSatisfiedByCriteria(), $orderBy, $limit, $offset);
 	}
+
+	public function findOneBySpecification(ICriteriaSpecification $specification)
+	{
+		return $this->findOneBy($specification->isSatisfiedByCriteria());
+	}
 }

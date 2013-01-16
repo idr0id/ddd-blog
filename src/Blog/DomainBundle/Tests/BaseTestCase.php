@@ -2,6 +2,7 @@
 
 namespace Blog\DomainBundle\Tests;
 
+use Blog\DomainBundle\Infrastructure\BaseRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Monolog\Logger;
 
@@ -85,4 +86,15 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
     {
         return new Logger('test');
     }
+
+	/**
+	 * Returns base repository
+	 *
+	 * @param string $entityName
+	 * @return BaseRepository
+	 */
+	protected function getRepository($entityName)
+	{
+		return $this->getDoctrine()->getRepository('BlogDomainBundle:' . $entityName);
+	}
 }
