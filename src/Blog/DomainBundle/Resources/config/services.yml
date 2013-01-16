@@ -1,12 +1,8 @@
 services:
-    blog.domain.doctrine.queryFactory:
-        class: Blog\DomainBundle\Doctrine\QueryFactory
-        arguments: [@doctrine]
-
     blog.domain.service.user:
         class: Blog\DomainBundle\Service\UserService
-        arguments: [@doctrine, @blog.domain.doctrine.queryFactory, @logger]
+        arguments: [@doctrine, @logger]
 
     blog.domain.service.post:
-            class: Blog\DomainBundle\Service\PostService
-            arguments: [@doctrine, @blog.domain.doctrine.queryFactory, @logger]
+        class: Blog\DomainBundle\Service\PostService
+        arguments: [@doctrine, @logger]

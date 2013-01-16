@@ -8,7 +8,7 @@ use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Blog\DomainBundle\Infrastructure\BaseRepository")
  * @ORM\Table(name="user")
  */
 class User

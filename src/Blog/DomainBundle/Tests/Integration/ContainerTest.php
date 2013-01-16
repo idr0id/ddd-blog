@@ -6,14 +6,6 @@ use Blog\DomainBundle\Tests\BaseTestCase;
 
 class ContainerTest extends BaseTestCase
 {
-    public function testContains_DoctrineQueryFactory()
-    {
-        $this->assertInstanceOf(
-            'Blog\DomainBundle\Doctrine\QueryFactory',
-            $this->get('blog.domain.doctrine.queryFactory')
-        );
-    }
-
     public function testContains_UserService()
     {
         $this->assertInstanceOf(
