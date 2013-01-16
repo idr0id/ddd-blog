@@ -5,6 +5,7 @@ namespace Blog\DomainBundle\Service;
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Entity\Post;
 use Blog\DomainBundle\Exception\DomainException;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class PostService extends BaseService
 {
@@ -34,12 +35,12 @@ class PostService extends BaseService
     //<editor-fold desc="Repository">
     public function getPost($id)
     {
-        return $this->getQueryFactory()->findPostById($id);
+        return $this->getRepository('Post')->find($id);
     }
 
     public function getAllPosts()
     {
-        return $this->getQueryFactory()->findAllPosts();
+        return new ArrayCollection($this->getRepository('Post')->findAll());
     }
     //</editor-fold>
 }

@@ -2,6 +2,7 @@
 
 namespace Blog\DomainBundle\Tests;
 
+use Blog\DomainBundle\Infrastructure\BaseRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Monolog\Logger;
 
@@ -49,21 +50,9 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
     protected function getEntityFixtureManager()
     {
         if ($this->entityFixtureManager === null) {
-            $this->entityFixtureManager = new EntityFixtureManager($this->getQueryFactory(), $this->getDoctrine());
+            $this->entityFixtureManager = new EntityFixtureManager($this->getDoctrine());
         }
         return $this->entityFixtureManager;
-    }
-
-    /**
-     * Returns query factory
-     *
-     * @return \Blog\DomainBundle\Doctrine\QueryFactory
-     */
-    protected function getQueryFactory()
-    {
-        $queryFactory = $this->get('blog.domain.doctrine.queryFactory');
-
-        return $queryFactory;
     }
 
     /**
@@ -85,4 +74,15 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
     {
         return new Logger('test');
     }
+
+	/**
+	 * Returns base repository
+	 *
+	 * @param string $entityName
+	 * @return BaseRepository
+	 */
+	protected function getRepository($entityName)
+	{
+		return $this->getDoctrine()->getRepository('BlogDomainBundle:' . $entityName);
+	}
 }
