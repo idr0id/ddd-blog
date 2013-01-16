@@ -8,22 +8,19 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 
 class EntityFixtureManager
 {
-    private $queryFactory;
-
-    public function __construct(QueryFactory $queryFactory, Registry $doctrine)
+    public function __construct(Registry $doctrine)
     {
-        $this->queryFactory = $queryFactory;
         $this->doctrine = $doctrine;
     }
 
     public function getUser()
     {
-        return $this->queryFactory->findUserByLogin('Tester');
+        return $this->doctrine->getRepository('BlogDomainBundle:User')->findOneBy(array('login' => 'Tester'));
     }
 
     public function getPostUser()
     {
-        return $this->queryFactory->findUserByLogin('PostTester');
+		return $this->doctrine->getRepository('BlogDomainBundle:User')->findOneBy(array('login' => 'PostTester'));
     }
 
     /**
@@ -31,6 +28,6 @@ class EntityFixtureManager
      */
     public function getAllPosts()
     {
-        return $this->doctrine->getRepository('Blog\DomainBundle\Entity\Post')->findAll();
+        return $this->doctrine->getRepository('BlogDomainBundle:Post')->findAll();
     }
 }

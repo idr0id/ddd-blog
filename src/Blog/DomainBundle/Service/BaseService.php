@@ -3,6 +3,7 @@
 namespace Blog\DomainBundle\Service;
 
 use Blog\DomainBundle\Doctrine\QueryFactory;
+use Blog\DomainBundle\Infrastructure\BaseRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Monolog\Logger;
 
@@ -14,21 +15,26 @@ abstract class BaseService
     private $doctrine;
 
     /**
-     * @var QueryFactory
-     */
-    private $queryFactory;
-
-    /**
      * @var Logger
      */
     private $logger;
 
-    public function __construct(Registry $doctrine, QueryFactory $queryFactory, Logger $logger)
+	public function __construct(Registry $doctrine, Logger $logger)
     {
         $this->doctrine = $doctrine;
-        $this->queryFactory = $queryFactory;
         $this->logger = $logger;
     }
+
+	/**
+	 * Returns repository
+	 *
+	 * @param string $entityName
+	 * @return BaseRepository
+	 */
+	protected function getRepository($entityName)
+	{
+		return $this->doctrine->getRepository('BlogDomainBundle:' . $entityName);
+	}
 
     protected function persist($entity)
     {
@@ -46,14 +52,6 @@ abstract class BaseService
     {
         $this->doctrine->getManager()->refresh($entity);
         return $this;
-    }
-
-    /**
-     * @return QueryFactory
-     */
-    protected function getQueryFactory()
-    {
-        return $this->queryFactory;
     }
 
     /**
