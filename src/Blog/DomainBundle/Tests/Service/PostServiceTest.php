@@ -2,73 +2,85 @@
 
 namespace Blog\DomainBundle\Tests\Service;
 
+use Blog\DomainBundle\Entity\Post;
+use Blog\DomainBundle\Entity\User;
+use Blog\DomainBundle\Infrastructure\IUnitOfWork;
 use Blog\DomainBundle\Service\PostService;
 use Blog\DomainBundle\Tests\BaseTestCase;
+use Blog\DomainBundle\Tests\Fakes\FakeUnitOfWork;
+use Blog\DomainBundle\Tests\Fakes\Repository\FakePostRepository;
+use Mockery;
 
 class PostServiceTest extends BaseTestCase
 {
-    /**
-     * @var PostService
-     */
-    private $service;
+	/**
+	 * @var PostService
+	 */
+	private $service;
 
-    protected function setUp()
-    {
-        $this->service = new PostService($this->getDoctrine(), $this->getLogger());
-    }
+	protected function setUp()
+	{
+		$this->service = new PostService(new FakeUnitOfWork(), new FakePostRepository());
+	}
 
-    public function testCreate()
-    {
-        $user = $this->getEntityFixtureManager()->getUser();
-        $title = 'Some text of title';
-        $text = 'Some text of post';
+	public function testCreate()
+	{
+		$author = $this->createUser();
+		$title = 'Some text of title';
+		$text = 'Some text of post';
 
-        $post = $this->service->create($user, $title, $text);
+		$post = $this->service->create($author, $title, $text);
 
-        $this->assertInstanceOf('Blog\DomainBundle\Entity\Post', $post);
-        $this->assertInstanceOf('DateTime', $post->getCreated());
-        $this->assertGreaterThan(0, $post->getId());
-        $this->assertEquals($user, $post->getAuthor());
-        $this->assertEquals($title, $post->getTitle());
-        $this->assertEquals($text, $post->getText());
-        $this->assertEquals($post, $user->getPosts()->get(0));
-    }
+		$this->assertInstanceOf('Blog\DomainBundle\Entity\Post', $post);
+		$this->assertInstanceOf('DateTime', $post->getCreated());
+		$this->assertEquals($title, $post->getTitle());
+		$this->assertEquals($text, $post->getText());
+		$this->assertSame($author, $post->getAuthor());
+		$this->assertTrue($author->getPosts()->contains($post));
+	}
 
-    public function testRemove()
-    {
-        $user = $this->getEntityFixtureManager()->getUser();
-        $post = $this->service->create($user, 'Some text of title', 'Some text of post');
+	public function testRemove()
+	{
+		// arrange
+		$author = $this->createUser();
+		$post = $this->service->create($author, 'Some text of title', 'Some text of post');
+		$this->assertEquals(1, $author->getPosts()->count());
 
-        $this->service->remove($post->getId());
+		// act
+		$this->service->remove($post->getId());
 
-        $this->assertEquals(1, $user->getPosts()->count());
-    }
+		// assert
+		$this->assertEquals(0, $author->getPosts()->count());
+	}
 
-    public function testRemoveNonexistentShouldThrowException()
-    {
-        $this->setExpectedException(
-            'Blog\DomainBundle\Exception\DomainException',
-            'Post "100500" does not exist'
-        );
-        $this->service->remove(100500);
-    }
+	public function testRemoveNonexistentShouldThrowException()
+	{
+		$this->setExpectedException('Blog\DomainBundle\Exception\DomainException');
 
-    public function testGetAllPosts()
-    {
-        $expectedPosts = $this->getEntityFixtureManager()->getAllPosts();
+		$this->service->remove(100500);
+	}
 
-        $posts = $this->service->getAllPosts();
+	public function testGetAllPosts()
+	{
+		$posts = $this->service->getAllPosts();
 
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $posts);
-        $this->assertEquals($expectedPosts, $posts->getValues());
-    }
+		$this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $posts);
+		$this->assertCount(3, $posts->getValues());
+	}
 
-    public function testGetPostById()
-    {
-        $expectedPosts = $this->getEntityFixtureManager()->getAllPosts();
+	public function testGetPostById()
+	{
+		$post = $this->service->getPost(1);
 
-        $post = $this->service->getPost($expectedPosts[0]->getId());
+		$this->assertInstanceOf('Blog\DomainBundle\Entity\Post', $post);
+		$this->assertEquals(1, $post->getId());
+	}
 
-        $this->assertEquals($expectedPosts[0], $post);
-    }
+	/**
+	 * @return \Blog\DomainBundle\Entity\User
+	 */
+	private function createUser()
+	{
+		return new User('login', 'password');
+	}
 }

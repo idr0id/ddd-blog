@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\DomainBundle\Tests;
+namespace Blog\DomainBundle\Tests\Utils;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -72,7 +72,7 @@ class TestsEnvironment
 
     private function buildKernel()
     {
-        require_once __DIR__ . "/../../../../app/AppKernel.php";
+        require_once __DIR__ . "/../../../../../app/AppKernel.php";
         $kernel = new \AppKernel("test", true);
         $kernel->boot();
         return $kernel;

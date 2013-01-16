@@ -2,22 +2,42 @@
 
 namespace Blog\DomainBundle\Service;
 
-use Blog\DomainBundle\Specification\User\LoginSpecification;
-use Doctrine\ORM\EntityManager;
-use Blog\DomainBundle\Exception\UserAlreadyExistsException;
 use Blog\DomainBundle\Entity\User;
+use Blog\DomainBundle\Exception\UserAlreadyExistsException;
+use Blog\DomainBundle\Infrastructure\IRepository;
+use Blog\DomainBundle\Infrastructure\IUnitOfWork;
+use Blog\DomainBundle\Specification\User\LoginSpecification;
 
-class UserService extends BaseService
+class UserService
 {
-    public function register($login, $password)
-    {
-        if ($this->getRepository('User')->findOneBySpecification(new LoginSpecification($login))) {
-            throw new UserAlreadyExistsException(sprintf('User "%s" already exists', $login));
-        }
+	/**
+	 * @var IRepository
+	 */
+	private $userRepository;
 
-        $user = new User($login, $password);
-        $this->persist($user)->flush();
-        return $user;
-    }
+	/**
+	 * @var IUnitOfWork
+	 */
+	private $uow;
+
+	public function __construct(IUnitOfWork $uow, IRepository $userRepository)
+	{
+		$this->uow = $uow;
+		$this->userRepository = $userRepository;
+	}
+
+	public function register($login, $password)
+	{
+		if ($this->userRepository->findOneBySpecification(new LoginSpecification($login))) {
+			throw new UserAlreadyExistsException(sprintf('User "%s" already exists', $login));
+		}
+
+		$user = new User($login, $password);
+
+		$this->userRepository->add($user);
+		$this->uow->commit();
+
+		return $user;
+	}
 
 }

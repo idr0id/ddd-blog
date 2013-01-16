@@ -47,7 +47,7 @@ class LoginSpecificationTest extends BaseTestCase
 
 	public function testRepositoryShouldFindUser()
 	{
-		$result = $this->getRepository('User')->findOneBySpecification($this->object);
+		$result = $this->get('doctrine')->getRepository('BlogDomainBundle:User')->findOneBySpecification($this->object);
 
 		$this->assertInstanceOf('Blog\\DomainBundle\\Entity\\User', $result);
 	}

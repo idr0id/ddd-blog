@@ -2,45 +2,88 @@
 
 namespace Blog\DomainBundle\Service;
 
-use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Entity\Post;
+use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Exception\DomainException;
+use Blog\DomainBundle\Infrastructure\IRepository;
+use Blog\DomainBundle\Infrastructure\IRepositoryFactory;
+use Blog\DomainBundle\Infrastructure\IUnitOfWork;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class PostService extends BaseService
+class PostService
 {
-    //<editor-fold desc="Domain">
-    public function create(User $user, $title, $text)
-    {
-        $post = new Post($user, $title, $text);
+	/**
+	 * @var IRepository
+	 */
+	private $userRepository;
 
-        $this->persist($post)->flush();
-        return $post;
-    }
+	/**
+	 * @var IUnitOfWork
+	 */
+	private $uow;
 
-    public function remove($id)
-    {
-        $post = $this->getPost($id);
+	public function __construct(IUnitOfWork $uow, IRepository $postRepository)
+	{
+		$this->uow = $uow;
+		$this->userRepository = $postRepository;
+	}
 
-        if ($post === null) {
-            throw new DomainException(sprintf('Post "%s" does not exist', $id));
-        }
+	/**
+	 * Returns post by id
+	 *
+	 * @param int $id
+	 * @return Post
+	 */
+	public function getPost($id)
+	{
+		return $this->userRepository->findById($id);
+	}
 
-        $post->getAuthor()->removePost($post);
+	/**
+	 * Returns all posts
+	 *
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getAllPosts()
+	{
+		return new ArrayCollection($this->userRepository->findAll());
+	}
 
-        $this->persist($post)->flush();
-    }
-    //</editor-fold>
+	/**
+	 * Create post
+	 *
+	 * @param User $user
+	 * @param string $title
+	 * @param string $text
+	 * @return Post
+	 */
+	public function create(User $user, $title, $text)
+	{
+		$post = new Post($user, $title, $text);
 
-    //<editor-fold desc="Repository">
-    public function getPost($id)
-    {
-        return $this->getRepository('Post')->find($id);
-    }
+		$this->userRepository->add($post);
+		$this->uow->commit();
 
-    public function getAllPosts()
-    {
-        return new ArrayCollection($this->getRepository('Post')->findAll());
-    }
-    //</editor-fold>
+		return $post;
+	}
+
+	/**
+	 * Remove post
+	 *
+	 * @param int $id
+	 * @throws DomainException
+	 */
+	public function remove($id)
+	{
+		$post = $this->getPost($id);
+
+		if ($post === null) {
+			throw new DomainException(sprintf('Post "%s" does not exist', $id));
+		}
+
+		$post->getAuthor()->removePost($post);
+
+		$this->userRepository->add($post);
+		$this->uow->commit();
+	}
 }
