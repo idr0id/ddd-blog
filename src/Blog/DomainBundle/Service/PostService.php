@@ -6,7 +6,6 @@ use Blog\DomainBundle\Entity\Post;
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Exception\DomainException;
 use Blog\DomainBundle\Infrastructure\IRepository;
-use Blog\DomainBundle\Infrastructure\IRepositoryFactory;
 use Blog\DomainBundle\Infrastructure\IUnitOfWork;
 use Doctrine\Common\Collections\ArrayCollection;
 

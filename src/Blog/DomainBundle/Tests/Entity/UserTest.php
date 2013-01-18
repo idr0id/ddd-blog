@@ -2,7 +2,6 @@
 
 namespace Blog\DomainBundle\Tests\Entity;
 
-use Blog\DomainBundle\Entity\Post;
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Tests\BaseTestCase;
 use Blog\DomainBundle\Tests\Utils\Entity\EntityFactory;
@@ -17,7 +16,7 @@ class UserTest extends BaseTestCase
 	protected function setUp()
 	{
 		$this->user = new User('login', 'password');
-    }
+	}
 
 	public function testEqualPassword()
 	{

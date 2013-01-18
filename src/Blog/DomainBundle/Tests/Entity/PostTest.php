@@ -8,8 +8,8 @@ use Blog\DomainBundle\Tests\Utils\Entity\EntityFactory;
 
 class PostTest extends BaseTestCase
 {
-    public function testCreatePost()
-    {
+	public function testCreatePost()
+	{
 		$author = EntityFactory::createUser();
 		$title = 'Some title!';
 		$text = 'Some looong text.';
@@ -20,5 +20,5 @@ class PostTest extends BaseTestCase
 		$this->assertEquals($text, $post->getText());
 		$this->assertSame($author, $post->getAuthor());
 		$this->assertTrue($author->getPosts()->contains($post));
-    }
+	}
 }
