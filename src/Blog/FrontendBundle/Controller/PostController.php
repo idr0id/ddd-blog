@@ -4,8 +4,7 @@ namespace Blog\FrontendBundle\Controller;
 
 use Blog\DomainBundle\Service\PostService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-/** @noinspection PhpUnusedAliasInspection */
-use	Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class PostController extends Controller
 {
