@@ -50,17 +50,24 @@ abstract class BaseFakeRepository implements IRepository
 		return null;
 	}
 
-	public function findBySpecification(ICriteriaSpecification $specification, array $orderBy = null, $limit = null, $offset = null)
-	{
+	public function findBySpecification(
+		ICriteriaSpecification $specification,
+		array $orderBy = null,
+		$limit = null,
+		$offset = null
+	) {
 		if (!$specification instanceof ISpecification) {
 			throw new \BadMethodCallException(
 				sprintf('Specification "%s" must implements ISpecification interface', get_class($specification))
 			);
 		}
 
-		return array_filter($this->entities, function ($entity) use ($specification) {
+		return array_filter(
+			$this->entities,
+			function ($entity) use ($specification) {
 				return $specification->isSatisfiedBy($entity);
-			});
+			}
+		);
 	}
 
 	public function add(IEntity $object)
@@ -81,7 +88,7 @@ abstract class BaseFakeRepository implements IRepository
 		unset($this->entities[$object->getId()]);
 	}
 
-	protected  function generateId()
+	protected function generateId()
 	{
 		return ++$this->lastId;
 	}

@@ -8,7 +8,12 @@ interface IRepository
 
 	public function findAll();
 
-	public function findBySpecification(ICriteriaSpecification $specification, array $orderBy = null, $limit = null, $offset = null);
+	public function findBySpecification(
+		ICriteriaSpecification $specification,
+		array $orderBy = null,
+		$limit = null,
+		$offset = null
+	);
 
 	public function findOneBySpecification(ICriteriaSpecification $specification);
 

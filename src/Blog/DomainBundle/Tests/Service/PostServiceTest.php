@@ -2,9 +2,7 @@
 
 namespace Blog\DomainBundle\Tests\Service;
 
-use Blog\DomainBundle\Entity\Post;
 use Blog\DomainBundle\Entity\User;
-use Blog\DomainBundle\Infrastructure\IUnitOfWork;
 use Blog\DomainBundle\Service\PostService;
 use Blog\DomainBundle\Tests\BaseTestCase;
 use Blog\DomainBundle\Tests\Fakes\FakeUnitOfWork;

@@ -14,8 +14,12 @@ class DoctrineGenericRepository extends EntityRepository implements IRepository
 		return $this->find($id);
 	}
 
-	public function findBySpecification(ICriteriaSpecification $specification, array $orderBy = null, $limit = null, $offset = null)
-	{
+	public function findBySpecification(
+		ICriteriaSpecification $specification,
+		array $orderBy = null,
+		$limit = null,
+		$offset = null
+	) {
 		return $this->findBy($specification->isSatisfiedByCriteria(), $orderBy, $limit, $offset);
 	}
 

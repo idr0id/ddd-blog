@@ -2,10 +2,7 @@
 
 namespace Blog\DomainBundle\Tests\Fakes\Repository;
 
-use Blog\DomainBundle\Infrastructure\ICriteriaSpecification;
 use Blog\DomainBundle\Infrastructure\IEntity;
-use Blog\DomainBundle\Infrastructure\IRepository;
-use Blog\DomainBundle\Infrastructure\ISpecification;
 use Blog\DomainBundle\Tests\Utils\Entity\EntityFactory;
 use Blog\DomainBundle\Tests\Utils\Entity\EntityIdentityChanger;
 

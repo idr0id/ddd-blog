@@ -2,8 +2,8 @@
 
 namespace Blog\DomainBundle\Tests\Utils\Entity;
 
-use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Entity\Post;
+use Blog\DomainBundle\Entity\User;
 
 class EntityFactory
 {
@@ -14,7 +14,7 @@ class EntityFactory
 
 	public static function createPost(User $author = null, $title = 'title', $text = 'text')
 	{
-		$author = $author ?: static::createUser();
+		$author = $author ? : static::createUser();
 		return new Post($author, $title, $text);
 	}
 }
