@@ -2,40 +2,44 @@
 
 namespace Blog\DomainBundle\Tests\Entity;
 
-use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Entity\Post;
-use Blog\DomainBundle\Tests\EntityFactory;
+use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Tests\BaseTestCase;
+use Blog\DomainBundle\Tests\Utils\Entity\EntityFactory;
 
 class UserTest extends BaseTestCase
 {
-    /**
-     * @var User
-     */
-    private $user;
+	/**
+	 * @var User
+	 */
+	private $user;
 
-    protected function setUp()
-    {
-        $this->user = EntityFactory::createUser();
+	protected function setUp()
+	{
+		$this->user = new User('login', 'password');
     }
 
-    public function testEqualPassword()
-    {
-        $this->assertTrue($this->user->checkPassword("somePassword"));
-    }
+	public function testEqualPassword()
+	{
+		// assert
+		$this->assertTrue($this->user->checkPassword('password'));
+	}
 
-    public function testChangePassword()
-    {
-        $this->user->changePasswordTo("changedPassword");
-        $this->assertTrue($this->user->checkPassword("changedPassword"));
-    }
+	public function testChangePasswordTo()
+	{
+		// act
+		$this->user->changePasswordTo("changedPassword");
+		// assert
+		$this->assertTrue($this->user->checkPassword('changedPassword'));
+	}
 
-    public function testRemovePost()
-    {
-        $post = new Post($this->user, 'some title', 'some text');
-
-        $this->user->removePost($post);
-
-        $this->assertFalse($this->user->getPosts()->contains($post));
-    }
+	public function testRemovePost()
+	{
+		// arrange
+		$post = EntityFactory::createPost($this->user);
+		// act
+		$this->user->removePost($post);
+		// assert
+		$this->assertFalse($this->user->getPosts()->contains($post));
+	}
 }

@@ -1,8 +1,8 @@
 services:
     blog.domain.service.user:
         class: Blog\DomainBundle\Service\UserService
-        arguments: [@doctrine, @logger]
+        arguments: [@blog.domain.unit_of_work, @blog.domain.repository.user]
 
     blog.domain.service.post:
         class: Blog\DomainBundle\Service\PostService
-        arguments: [@doctrine, @logger]
+        arguments: [@blog.domain.unit_of_work, @blog.domain.repository.post]
