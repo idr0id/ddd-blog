@@ -2,9 +2,9 @@
 
 namespace Blog\DomainBundle\Tests\Integration;
 
-use Blog\DomainBundle\Tests\BaseTestCase;
+use Blog\DomainBundle\Tests\BaseIntegrationTestCate;
 
-class ContainerTest extends BaseTestCase
+class ContainerTest extends BaseIntegrationTestCate
 {
 	public function testContains_UserService()
 	{

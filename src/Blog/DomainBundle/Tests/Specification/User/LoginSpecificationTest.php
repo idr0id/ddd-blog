@@ -4,9 +4,10 @@ namespace Blog\DomainBundle\Tests\Specification\User;
 
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Specification\User\LoginSpecification;
+use Blog\DomainBundle\Tests\BaseIntegrationTestCate;
 use Blog\DomainBundle\Tests\BaseTestCase;
 
-class LoginSpecificationTest extends BaseTestCase
+class LoginSpecificationTest extends BaseIntegrationTestCate
 {
 	/**
 	 * @var LoginSpecification
@@ -47,7 +48,7 @@ class LoginSpecificationTest extends BaseTestCase
 
 	public function testRepositoryShouldFindUser()
 	{
-		$result = $this->get('doctrine')->getRepository('BlogDomainBundle:User')->findOneBySpecification($this->object);
+		$result = $this->getRepository('User')->findOneBySpecification($this->object);
 
 		$this->assertInstanceOf('Blog\\DomainBundle\\Entity\\User', $result);
 	}
