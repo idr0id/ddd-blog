@@ -4,12 +4,13 @@
 # Bootstrap
 app/bootstrap*
 
-# Symfony directories
+# Symfony2
 vendor/*
 */logs/*
 */cache/*
 web/uploads/*
 web/bundles/*
+app/SymfonyRequirements.php
 
 # Configuration files
 app/config/parameters.yml
