@@ -32,6 +32,6 @@ class PostController extends Controller
 	 */
 	private function getPostService()
 	{
-		return $this->get('domain.service.post');
+		return $this->get('blog.domain.service.post');
 	}
 }
