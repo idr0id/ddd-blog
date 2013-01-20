@@ -40,11 +40,18 @@ class User implements IEntity
 	 */
 	private $posts;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="Comment", mappedBy="author", cascade={"persist", "remove"})
+	 * @var Comment[]
+	 */
+	private $comments;
+
 	public function __construct($login, $password)
 	{
 		$this->login = $login;
 		$this->changePasswordTo($password);
 		$this->posts = new ArrayCollection();
+		$this->comments = new ArrayCollection();
 	}
 
 	public function changePasswordTo($newPassword)

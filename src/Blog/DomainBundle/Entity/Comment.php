@@ -2,15 +2,13 @@
 
 namespace Blog\DomainBundle\Entity;
 
-use Blog\InfrastructureBundle\ORM\IEntity;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="post")
+ * @ORM\Entity(repositoryClass="Blog\DomainBundle\Infrastructure\Doctrine\DoctrineGenericRepository")
+ * @ORM\Table(name="comment")
  */
-class Post implements IEntity
+class Comment
 {
 	/**
 	 * @ORM\Id
@@ -21,16 +19,16 @@ class Post implements IEntity
 	private $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
+	 * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
 	 * @var User
 	 */
 	private $author;
 
 	/**
-	 * @ORM\Column(type="string", length=255)
-	 * @var string
+	 * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
+	 * @var Post
 	 */
-	private $title;
+	private $post;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -39,23 +37,17 @@ class Post implements IEntity
 	private $text;
 
 	/**
+	 * @ORM\Column(type="integer")
 	 * @var \DateTime
 	 */
 	private $created;
 
-	/**
-	 * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", cascade={"persist", "remove"})
-	 * @var Comment[]
-	 */
-	private $comments;
-
-	public function __construct(User $author, $title, $text)
+	function __construct(User $author, Post $post, $text)
 	{
 		$this->setAuthor($author)
-			->setTitle($title)
+			->setPost($post)
 			->setText($text)
 			->setCreated(new \DateTime());
-		$this->comments = new ArrayCollection();
 	}
 
 	//<editor-fold desc="gets/sets">
@@ -69,21 +61,20 @@ class Post implements IEntity
 		return $this->author;
 	}
 
-	private function setAuthor(User $author = null)
+	private function setAuthor(User $author)
 	{
 		$this->author = $author;
-		$this->author->addPost($this);
 		return $this;
 	}
 
-	public function getTitle()
+	public function getPost()
 	{
-		return $this->title;
+		return $this->post;
 	}
 
-	public function setTitle($title)
+	private function setPost(Post $post)
 	{
-		$this->title = $title;
+		$this->post = $post;
 		return $this;
 	}
 
@@ -103,10 +94,12 @@ class Post implements IEntity
 		return $this->created;
 	}
 
-	public function setCreated(\DateTime $created)
+	/**
+	 * @param \DateTime $created
+	 */
+	private function setCreated(\DateTime $created)
 	{
 		$this->created = $created;
-		return $this;
 	}
 	//</editor-fold>
 }
