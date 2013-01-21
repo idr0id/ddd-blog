@@ -7,7 +7,6 @@ use Blog\DomainBundle\Service\PostService;
 use Blog\DomainBundle\Tests\BaseTestCase;
 use Blog\DomainBundle\Tests\Fakes\FakeUnitOfWork;
 use Blog\DomainBundle\Tests\Fakes\Repository\FakePostRepository;
-use Mockery;
 
 class PostServiceTest extends BaseTestCase
 {

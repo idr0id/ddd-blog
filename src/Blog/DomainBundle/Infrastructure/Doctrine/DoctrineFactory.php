@@ -15,7 +15,7 @@ class DoctrineFactory implements IRepositoryFactory, IUnitOfWorkFactory
 	/**
 	 * @param Registry $doctrine
 	 */
-	function __construct(Registry $doctrine)
+	public function __construct(Registry $doctrine)
 	{
 		$this->doctrine = $doctrine;
 	}

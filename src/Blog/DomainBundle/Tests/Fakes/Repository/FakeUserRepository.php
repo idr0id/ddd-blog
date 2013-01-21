@@ -2,6 +2,7 @@
 
 namespace Blog\DomainBundle\Tests\Fakes\Repository;
 
+use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Infrastructure\IEntity;
 use Blog\DomainBundle\Tests\Utils\Entity\EntityFactory;
 use Blog\DomainBundle\Tests\Utils\Entity\EntityIdentityChanger;
@@ -22,6 +23,9 @@ class FakeUserRepository extends BaseFakeRepository
 
 	protected function changeIdentifier(IEntity $object)
 	{
+		if (!$object instanceof User) {
+			throw new \Exception('Entity must be Post');
+		}
 		EntityIdentityChanger::changeUserId($object, $this->generateId());
 	}
 }

@@ -5,7 +5,6 @@ namespace Blog\DomainBundle\Tests\Specification\User;
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Specification\User\LoginSpecification;
 use Blog\DomainBundle\Tests\BaseIntegrationTestCate;
-use Blog\DomainBundle\Tests\BaseTestCase;
 
 class LoginSpecificationTest extends BaseIntegrationTestCate
 {

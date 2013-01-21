@@ -4,6 +4,7 @@ namespace Blog\DomainBundle\Infrastructure\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 class DoctrineHelper
 {
@@ -16,6 +17,7 @@ class DoctrineHelper
 	{
 		/** @var $connection \Doctrine\DBAL\Connection */
 		$connection = $manager->getConnection();
+		/** @var $cmd ClassMetadata */
 		$cmd = $manager->getClassMetadata($class);
 
 		$connection->beginTransaction();

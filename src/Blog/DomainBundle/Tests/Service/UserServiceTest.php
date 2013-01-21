@@ -6,7 +6,6 @@ use Blog\DomainBundle\Service\UserService;
 use Blog\DomainBundle\Tests\BaseTestCase;
 use Blog\DomainBundle\Tests\Fakes\FakeUnitOfWork;
 use Blog\DomainBundle\Tests\Fakes\Repository\FakeUserRepository;
-use Mockery;
 
 class UserServiceTest extends BaseTestCase
 {
