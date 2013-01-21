@@ -13,4 +13,9 @@ interface IRepositoryFactory
 	 * @return IRepository
 	 */
 	public function createPostRepository();
+
+	/**
+	 * @return IRepository
+	 */
+	public function createCommentRepository();
 }

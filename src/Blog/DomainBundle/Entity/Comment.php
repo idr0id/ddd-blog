@@ -2,13 +2,14 @@
 
 namespace Blog\DomainBundle\Entity;
 
+use Blog\InfrastructureBundle\ORM\IEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Blog\DomainBundle\Infrastructure\Doctrine\DoctrineGenericRepository")
+ * @ORM\Entity
  * @ORM\Table(name="comment")
  */
-class Comment
+class Comment implements IEntity
 {
 	/**
 	 * @ORM\Id

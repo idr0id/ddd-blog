@@ -17,3 +17,9 @@ services:
         class: Blog\InfrastructureBundle\ORM\IRepository
         factory_service: blog.domain.doctrine.doctrine_factory
         factory_method: createPostRepository
+
+    blog.domain.repository.comment:
+        class: Blog\InfrastructureBundle\ORM\IRepository
+        factory_service: blog.domain.doctrine.doctrine_factory
+        factory_method: createCommentRepository
+        public: false

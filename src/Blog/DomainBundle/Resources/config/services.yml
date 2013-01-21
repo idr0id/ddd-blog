@@ -6,3 +6,7 @@ services:
     blog.domain.service.post:
         class: Blog\DomainBundle\Service\PostService
         arguments: [@blog.domain.unit_of_work, @blog.domain.repository.post]
+
+    blog.domain.service.comment:
+        class: Blog\DomainBundle\Service\CommentService
+        arguments: [@blog.domain.unit_of_work, @blog.domain.repository.comment]

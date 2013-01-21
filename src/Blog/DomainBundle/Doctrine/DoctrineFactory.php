@@ -36,6 +36,14 @@ class DoctrineFactory implements IRepositoryFactory, IUnitOfWorkFactory
 	}
 
 	/**
+	 * @return IRepository
+	 */
+	public function createCommentRepository()
+	{
+		return $this->doctrine->getRepository('BlogDomainBundle:Comment');
+	}
+
+	/**
 	 * @return IUnitOfWork
 	 */
 	public function createUnitOfWork()
