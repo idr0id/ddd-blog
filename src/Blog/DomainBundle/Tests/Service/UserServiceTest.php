@@ -21,16 +21,19 @@ class UserServiceTest extends BaseTestCase
 
 	public function testRegisterNewUserShouldBeSuccess()
 	{
+		// act
 		$user = $this->service->register('NewUser', 'NewPassword');
 
+		// assert
 		$this->assertInstanceOf('Blog\DomainBundle\Entity\User', $user);
-		$this->assertGreaterThan(0, $user->getId());
 	}
 
 	public function testRegisterExistsUserShouldBeFailed()
 	{
+		// arrange
 		$this->setExpectedException('Blog\DomainBundle\Exception\UserAlreadyExistsException');
 
+		// act
 		$this->service->register('login 1', 'password 1');
 	}
 }
