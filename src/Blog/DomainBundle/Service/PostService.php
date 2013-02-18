@@ -14,7 +14,7 @@ class PostService
 	/**
 	 * @var IRepository
 	 */
-	private $userRepository;
+	private $postRepository;
 
 	/**
 	 * @var IUnitOfWork
@@ -24,7 +24,7 @@ class PostService
 	public function __construct(IUnitOfWork $uow, IRepository $postRepository)
 	{
 		$this->uow = $uow;
-		$this->userRepository = $postRepository;
+		$this->postRepository = $postRepository;
 	}
 
 	/**
@@ -35,7 +35,7 @@ class PostService
 	 */
 	public function getPost($id)
 	{
-		return $this->userRepository->findById($id);
+		return $this->postRepository->findById($id);
 	}
 
 	/**
@@ -45,7 +45,7 @@ class PostService
 	 */
 	public function getAllPosts()
 	{
-		return new ArrayCollection($this->userRepository->findAll());
+		return new ArrayCollection($this->postRepository->findAll());
 	}
 
 	/**
@@ -60,7 +60,7 @@ class PostService
 	{
 		$post = new Post($user, $title, $text);
 
-		$this->userRepository->add($post);
+		$this->postRepository->add($post);
 		$this->uow->commit();
 
 		return $post;
@@ -82,7 +82,7 @@ class PostService
 
 		$post->getAuthor()->removePost($post);
 
-		$this->userRepository->add($post);
+		$this->postRepository->add($post);
 		$this->uow->commit();
 	}
 }
