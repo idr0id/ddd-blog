@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\DomainBundle\Tests\Entity;
+namespace Blog\DomainBundle\Tests\Unit\Entity;
 
 use Blog\DomainBundle\Entity\Post;
 use Blog\DomainBundle\Entity\User;

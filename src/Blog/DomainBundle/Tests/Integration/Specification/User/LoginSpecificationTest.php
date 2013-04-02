@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\DomainBundle\Tests\Specification\User;
+namespace Blog\DomainBundle\Tests\Integration\Specification\User;
 
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Specification\User\LoginSpecification;
