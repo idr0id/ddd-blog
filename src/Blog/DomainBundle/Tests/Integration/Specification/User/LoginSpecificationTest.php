@@ -10,20 +10,42 @@ class LoginSpecificationTest extends IntegrationTestCaseBase
 {
 	public function testSatisfiedIsShouldBeTrue()
 	{
+		// arrange
 		$specification = new LoginSpecification('Tester');
-		$this->assertTrue($specification->isSatisfiedBy(new User('Tester', '')));
+		$user = new User('Tester', '');
+		// act
+		$isSatisfiedBy = $specification->isSatisfiedBy($user);
+		// assert
+		$this->assertTrue($isSatisfiedBy);
 	}
 
 	public function testSatisfiedIsShouldBeFalse()
 	{
+		// arrange
 		$specification = new LoginSpecification('Tester');
-		$this->assertFalse($specification->isSatisfiedBy(new User('Yet another tester', '')));
+		$user = new User('Yet another tester', '');
+		// act
+		$isSatisfiedBy = $specification->isSatisfiedBy($user);
+		// assert
+		$this->assertFalse($isSatisfiedBy);
+	}
+
+	public function testSatisfiedIsShouldBeRaiseException()
+	{
+		$this->setExpectedException('\\BadMethodCallException');
+		// arrange
+		$specification = new LoginSpecification('Tester');
+		// act
+		$specification->isSatisfiedBy($this->getMock('Blog\InfrastructureBundle\ORM\IEntity'));
 	}
 
 	public function testRepositoryShouldFindUser()
 	{
-		$result = $this->getRepository('user')->findBySpecification(new LoginSpecification('Tester'));
-
-		$this->assertInstanceOf('Blog\\DomainBundle\\Entity\\User', $result);
+		// arrange
+		$specification = new LoginSpecification('Tester');
+		// act
+		$user = $this->getRepository('user')->findBySpecification($specification);
+		// assert
+		$this->assertInstanceOf('Blog\\DomainBundle\\Entity\\User', $user);
 	}
 }
