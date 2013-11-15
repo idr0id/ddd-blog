@@ -2,9 +2,11 @@
 
 namespace Blog\InfrastructureBundle\ORM;
 
-use Doctrine\ORM\QueryBuilder;
-
 interface ISpecification
 {
-	public function isSatisfiedBy($object);
+	/**
+	 * @param IEntity $object
+	 * @return boolean
+	 */
+	public function isSatisfiedBy(IEntity $object);
 }

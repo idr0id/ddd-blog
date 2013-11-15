@@ -28,7 +28,7 @@ class UserService
 
 	public function register($login, $password)
 	{
-		if ($this->userRepository->findOneBySpecification(new LoginSpecification($login))) {
+		if ($this->userRepository->findBySpecification(new LoginSpecification($login))) {
 			throw new UserAlreadyExistsException(sprintf('User "%s" already exists', $login));
 		}
 

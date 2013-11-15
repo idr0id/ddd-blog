@@ -1,6 +1,8 @@
 <?php
 
-namespace Blog\InfrastructureBundle\ORM;
+namespace Blog\DomainBundle\Doctrine;
+
+use Blog\InfrastructureBundle\ORM\IUnitOfWork;
 
 interface IUnitOfWorkFactory
 {

@@ -9,7 +9,7 @@ use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Blog\InfrastructureBundle\ORM\Doctrine\DoctrineGenericRepository")
+ * @ORM\Entity
  * @ORM\Table(name="user")
  */
 class User implements IEntity

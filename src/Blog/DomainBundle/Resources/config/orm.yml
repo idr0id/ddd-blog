@@ -1,0 +1,19 @@
+services:
+    blog.domain.doctrine.doctrine_factory:
+        class: Blog\DomainBundle\Doctrine\DoctrineFactory
+        arguments: [@doctrine]
+
+    blog.domain.unit_of_work:
+        class: Blog\InfrastructureBundle\ORM\IUnitOfWork
+        factory_service: blog.domain.doctrine.doctrine_factory
+        factory_method: createUnitOfWork
+
+    blog.domain.repository.user:
+        class: Blog\InfrastructureBundle\ORM\IRepository
+        factory_service: blog.domain.doctrine.doctrine_factory
+        factory_method: createUserRepository
+
+    blog.domain.repository.post:
+        class: Blog\InfrastructureBundle\ORM\IRepository
+        factory_service: blog.domain.doctrine.doctrine_factory
+        factory_method: createPostRepository

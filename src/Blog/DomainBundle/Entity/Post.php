@@ -6,7 +6,7 @@ use Blog\InfrastructureBundle\ORM\IEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Blog\InfrastructureBundle\ORM\Doctrine\DoctrineGenericRepository")
+ * @ORM\Entity
  * @ORM\Table(name="post")
  */
 class Post implements IEntity

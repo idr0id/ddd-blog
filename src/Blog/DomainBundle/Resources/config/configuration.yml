@@ -1,4 +1,3 @@
 imports:
-    - { resource: infrastructure.yml }
-    - { resource: repositories.yml }
+    - { resource: orm.yml }
     - { resource: services.yml }

@@ -45,6 +45,6 @@ class BaseIntegrationTestCate extends BaseTestCase
 	 */
 	protected function getRepository($entityName)
 	{
-		return $this->get('doctrine')->getRepository("BlogDomainBundle:{$entityName}");
+		return $this->get(sprintf("blog.domain.repository.%s", strtolower($entityName)));
 	}
 }

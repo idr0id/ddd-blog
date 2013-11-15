@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\InfrastructureBundle\ORM;
+namespace Blog\DomainBundle\Doctrine;
 
 interface IRepositoryFactory
 {

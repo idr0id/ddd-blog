@@ -5,19 +5,12 @@ namespace Blog\InfrastructureBundle\ORM;
 interface IRepository
 {
 	public function findById($id);
+	public function findBySpecification(ISpecificationCriteria $specification);
 
 	public function findAll();
+	public function findAllBySpecification(ISpecificationCriteria $specification);
 
-	public function findBySpecification(
-		ICriteriaSpecification $specification,
-		array $orderBy = null,
-		$limit = null,
-		$offset = null
-	);
-
-	public function findOneBySpecification(ICriteriaSpecification $specification);
-
-	public function add(IEntity $object);
-
-	public function remove(IEntity $object);
+	public function add(IEntity $entity);
+	public function remove(IEntity $entity);
+	public function update(IEntity $entity);
 }
