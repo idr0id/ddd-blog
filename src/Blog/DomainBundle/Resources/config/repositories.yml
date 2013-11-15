@@ -1,12 +1,12 @@
 services:
     blog.domain.repository.user:
-        class: Blog\DomainBundle\Infrastructure\IRepository
+        class: Blog\InfrastructureBundle\ORM\IRepository
         factory_service: blog.domain.infrastructure.doctrine.factory
         factory_method: createUserRepository
         public: false
 
     blog.domain.repository.post:
-        class: Blog\DomainBundle\Infrastructure\IRepository
+        class: Blog\InfrastructureBundle\ORM\IRepository
         factory_service: blog.domain.infrastructure.doctrine.factory
         factory_method: createPostRepository
         public: false

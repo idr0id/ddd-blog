@@ -4,7 +4,7 @@ namespace Blog\DomainBundle\Tests\DataFixtures;
 
 use Blog\DomainBundle\Entity\Post;
 use Blog\DomainBundle\Entity\User;
-use Blog\DomainBundle\Infrastructure\Doctrine\DoctrineHelper;
+use Blog\InfrastructureBundle\ORM\Doctrine\DoctrineHelper;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Blog\DomainBundle\Infrastructure\Doctrine;
+namespace Blog\InfrastructureBundle\ORM\Doctrine;
 
-use Blog\DomainBundle\Infrastructure\IUnitOfWork;
+use Blog\InfrastructureBundle\ORM\IUnitOfWork;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
 class DoctrineUnitOfWork implements IUnitOfWork

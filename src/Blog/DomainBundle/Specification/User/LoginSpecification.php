@@ -3,8 +3,8 @@
 namespace Blog\DomainBundle\Specification\User;
 
 use Blog\DomainBundle\Entity\User;
-use Blog\DomainBundle\Infrastructure\ICriteriaSpecification;
-use Blog\DomainBundle\Infrastructure\ISpecification;
+use Blog\InfrastructureBundle\ORM\ICriteriaSpecification;
+use Blog\InfrastructureBundle\ORM\ISpecification;
 
 class LoginSpecification implements ISpecification, ICriteriaSpecification
 {
@@ -27,7 +27,7 @@ class LoginSpecification implements ISpecification, ICriteriaSpecification
 	/**
 	 * @return array
 	 */
-	public function isSatisfiedByCriteria()
+	public function getCriteria()
 	{
 		return array('login' => $this->login);
 	}

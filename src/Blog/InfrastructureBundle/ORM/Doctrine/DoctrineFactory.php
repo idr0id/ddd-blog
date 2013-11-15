@@ -1,11 +1,11 @@
 <?php
 
-namespace Blog\DomainBundle\Infrastructure\Doctrine;
+namespace Blog\InfrastructureBundle\ORM\Doctrine;
 
-use Blog\DomainBundle\Infrastructure\IRepository;
-use Blog\DomainBundle\Infrastructure\IRepositoryFactory;
-use Blog\DomainBundle\Infrastructure\IUnitOfWork;
-use Blog\DomainBundle\Infrastructure\IUnitOfWorkFactory;
+use Blog\InfrastructureBundle\ORM\IRepository;
+use Blog\InfrastructureBundle\ORM\IRepositoryFactory;
+use Blog\InfrastructureBundle\ORM\IUnitOfWork;
+use Blog\InfrastructureBundle\ORM\IUnitOfWorkFactory;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
 class DoctrineFactory implements IRepositoryFactory, IUnitOfWorkFactory

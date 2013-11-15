@@ -2,7 +2,7 @@
 
 namespace Blog\DomainBundle\Tests;
 
-use Blog\DomainBundle\Infrastructure\IRepository;
+use Blog\InfrastructureBundle\ORM\IRepository;
 use Blog\DomainBundle\Tests\Utils\TestsEnvironment;
 
 class BaseIntegrationTestCate extends BaseTestCase

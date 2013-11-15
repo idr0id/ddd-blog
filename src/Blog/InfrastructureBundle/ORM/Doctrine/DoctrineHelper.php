@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\DomainBundle\Infrastructure\Doctrine;
+namespace Blog\InfrastructureBundle\ORM\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;

@@ -20,8 +20,8 @@ class LoginSpecificationTest extends BaseIntegrationTestCate
 
 	public function testImplements()
 	{
-		$this->assertInstanceOf('Blog\\DomainBundle\\Infrastructure\\ISpecification', $this->object);
-		$this->assertInstanceOf('Blog\\DomainBundle\\Infrastructure\\ICriteriaSpecification', $this->object);
+		$this->assertInstanceOf('Blog\\InfrastructureBundle\\ORM\\ISpecification', $this->object);
+		$this->assertInstanceOf('Blog\\InfrastructureBundle\\ORM\\ICriteriaSpecification', $this->object);
 	}
 
 	public function testSatisfiedIsShouldBeTrue()

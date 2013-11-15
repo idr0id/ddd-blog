@@ -2,10 +2,10 @@
 
 namespace Blog\DomainBundle\Tests\Fakes\Repository;
 
-use Blog\DomainBundle\Infrastructure\ICriteriaSpecification;
-use Blog\DomainBundle\Infrastructure\IEntity;
-use Blog\DomainBundle\Infrastructure\IRepository;
-use Blog\DomainBundle\Infrastructure\ISpecification;
+use Blog\InfrastructureBundle\ORM\ICriteriaSpecification;
+use Blog\InfrastructureBundle\ORM\IEntity;
+use Blog\InfrastructureBundle\ORM\IRepository;
+use Blog\InfrastructureBundle\ORM\ISpecification;
 
 abstract class BaseFakeRepository implements IRepository
 {

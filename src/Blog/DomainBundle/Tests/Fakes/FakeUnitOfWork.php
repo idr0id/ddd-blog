@@ -2,7 +2,7 @@
 
 namespace Blog\DomainBundle\Tests\Fakes;
 
-use Blog\DomainBundle\Infrastructure\IUnitOfWork;
+use Blog\InfrastructureBundle\ORM\IUnitOfWork;
 
 class FakeUnitOfWork implements IUnitOfWork
 {

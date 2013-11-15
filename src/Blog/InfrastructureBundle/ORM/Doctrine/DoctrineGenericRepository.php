@@ -1,10 +1,10 @@
 <?php
 
-namespace Blog\DomainBundle\Infrastructure\Doctrine;
+namespace Blog\InfrastructureBundle\ORM\Doctrine;
 
-use Blog\DomainBundle\Infrastructure\ICriteriaSpecification;
-use Blog\DomainBundle\Infrastructure\IEntity;
-use Blog\DomainBundle\Infrastructure\IRepository;
+use Blog\InfrastructureBundle\ORM\ICriteriaSpecification;
+use Blog\InfrastructureBundle\ORM\IEntity;
+use Blog\InfrastructureBundle\ORM\IRepository;
 use Doctrine\ORM\EntityRepository;
 
 class DoctrineGenericRepository extends EntityRepository implements IRepository
@@ -20,12 +20,12 @@ class DoctrineGenericRepository extends EntityRepository implements IRepository
 		$limit = null,
 		$offset = null
 	) {
-		return $this->findBy($specification->isSatisfiedByCriteria(), $orderBy, $limit, $offset);
+		return $this->findBy($specification->getCriteria(), $orderBy, $limit, $offset);
 	}
 
 	public function findOneBySpecification(ICriteriaSpecification $specification)
 	{
-		return $this->findOneBy($specification->isSatisfiedByCriteria());
+		return $this->findOneBy($specification->getCriteria());
 	}
 
 	public function findAll()

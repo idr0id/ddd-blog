@@ -4,8 +4,8 @@ namespace Blog\DomainBundle\Service;
 
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Exception\UserAlreadyExistsException;
-use Blog\DomainBundle\Infrastructure\IRepository;
-use Blog\DomainBundle\Infrastructure\IUnitOfWork;
+use Blog\InfrastructureBundle\ORM\IRepository;
+use Blog\InfrastructureBundle\ORM\IUnitOfWork;
 use Blog\DomainBundle\Specification\User\LoginSpecification;
 
 class UserService

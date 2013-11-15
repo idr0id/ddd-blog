@@ -3,7 +3,7 @@
 namespace Blog\DomainBundle\Tests\Fakes\Repository;
 
 use Blog\DomainBundle\Entity\Post;
-use Blog\DomainBundle\Infrastructure\IEntity;
+use Blog\InfrastructureBundle\ORM\IEntity;
 use Blog\DomainBundle\Tests\Utils\Entity\EntityFactory;
 use Blog\DomainBundle\Tests\Utils\Entity\EntityIdentityChanger;
 
