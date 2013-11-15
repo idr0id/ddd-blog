@@ -1,11 +1,11 @@
 <?php
 
-namespace Blog\DomainBundle\Infrastructure\Doctrine;
+namespace Blog\InfrastructureBundle\Doctrine;
 
-use Blog\DomainBundle\Infrastructure\IUnitOfWork;
+use Blog\InfrastructureBundle\ORM\IUnitOfWork;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
-class DoctrineUnitOfWork implements IUnitOfWork
+class UnitOfWork implements IUnitOfWork
 {
 	private $doctrine;
 

@@ -3,10 +3,12 @@
 namespace Blog\DomainBundle\Specification\User;
 
 use Blog\DomainBundle\Entity\User;
-use Blog\DomainBundle\Infrastructure\ICriteriaSpecification;
-use Blog\DomainBundle\Infrastructure\ISpecification;
+use Blog\InfrastructureBundle\ORM\IEntity;
+use Blog\InfrastructureBundle\ORM\ISpecificationCriteria;
+use Blog\InfrastructureBundle\ORM\ISpecification;
+use Doctrine\Common\Collections\Criteria;
 
-class LoginSpecification implements ISpecification, ICriteriaSpecification
+class LoginSpecification implements ISpecification, ISpecificationCriteria
 {
 	private $login;
 
@@ -15,7 +17,7 @@ class LoginSpecification implements ISpecification, ICriteriaSpecification
 		$this->login = $login;
 	}
 
-	public function isSatisfiedBy($object)
+	public function isSatisfiedBy(IEntity $object)
 	{
 		if (!$object instanceof User) {
 			throw new \BadMethodCallException(sprintf("I only deal with users, you gave me: %s", get_class($object)));
@@ -24,11 +26,8 @@ class LoginSpecification implements ISpecification, ICriteriaSpecification
 		return $object->getLogin() == $this->login;
 	}
 
-	/**
-	 * @return array
-	 */
-	public function isSatisfiedByCriteria()
+	public function getCriteria()
 	{
-		return array('login' => $this->login);
+		return Criteria::create()->where(Criteria::expr()->eq('login', $this->login));
 	}
 }

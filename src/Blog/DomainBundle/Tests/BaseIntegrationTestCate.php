@@ -2,7 +2,7 @@
 
 namespace Blog\DomainBundle\Tests;
 
-use Blog\DomainBundle\Infrastructure\IRepository;
+use Blog\InfrastructureBundle\ORM\IRepository;
 use Blog\DomainBundle\Tests\Utils\TestsEnvironment;
 
 class BaseIntegrationTestCate extends BaseTestCase
@@ -45,6 +45,6 @@ class BaseIntegrationTestCate extends BaseTestCase
 	 */
 	protected function getRepository($entityName)
 	{
-		return $this->get('doctrine')->getRepository("BlogDomainBundle:{$entityName}");
+		return $this->get(sprintf("blog.domain.repository.%s", strtolower($entityName)));
 	}
 }

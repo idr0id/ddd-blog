@@ -4,8 +4,8 @@ namespace Blog\DomainBundle\Service;
 
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Exception\UserAlreadyExistsException;
-use Blog\DomainBundle\Infrastructure\IRepository;
-use Blog\DomainBundle\Infrastructure\IUnitOfWork;
+use Blog\InfrastructureBundle\ORM\IRepository;
+use Blog\InfrastructureBundle\ORM\IUnitOfWork;
 use Blog\DomainBundle\Specification\User\LoginSpecification;
 
 class UserService
@@ -28,7 +28,7 @@ class UserService
 
 	public function register($login, $password)
 	{
-		if ($this->userRepository->findOneBySpecification(new LoginSpecification($login))) {
+		if ($this->userRepository->findBySpecification(new LoginSpecification($login))) {
 			throw new UserAlreadyExistsException(sprintf('User "%s" already exists', $login));
 		}
 

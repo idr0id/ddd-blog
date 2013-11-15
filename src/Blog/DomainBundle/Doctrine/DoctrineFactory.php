@@ -1,11 +1,10 @@
 <?php
 
-namespace Blog\DomainBundle\Infrastructure\Doctrine;
+namespace Blog\DomainBundle\Doctrine;
 
-use Blog\DomainBundle\Infrastructure\IRepository;
-use Blog\DomainBundle\Infrastructure\IRepositoryFactory;
-use Blog\DomainBundle\Infrastructure\IUnitOfWork;
-use Blog\DomainBundle\Infrastructure\IUnitOfWorkFactory;
+use Blog\InfrastructureBundle\Doctrine\UnitOfWork;
+use Blog\InfrastructureBundle\ORM\IRepository;
+use Blog\InfrastructureBundle\ORM\IUnitOfWork;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
 class DoctrineFactory implements IRepositoryFactory, IUnitOfWorkFactory
@@ -41,6 +40,6 @@ class DoctrineFactory implements IRepositoryFactory, IUnitOfWorkFactory
 	 */
 	public function createUnitOfWork()
 	{
-		return new DoctrineUnitOfWork($this->doctrine);
+		return new UnitOfWork($this->doctrine);
 	}
 }

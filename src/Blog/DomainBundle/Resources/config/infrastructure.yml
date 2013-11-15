@@ -1,9 +1,0 @@
-services:
-    blog.domain.infrastructure.doctrine.factory:
-        class: Blog\DomainBundle\Infrastructure\Doctrine\DoctrineFactory
-        arguments: [@doctrine]
-
-    blog.domain.unit_of_work:
-        class: Blog\DomainBundle\Infrastructure\IUnitOfWork
-        factory_service: blog.domain.infrastructure.doctrine.factory
-        factory_method: createUnitOfWork

@@ -5,8 +5,8 @@ namespace Blog\DomainBundle\Service;
 use Blog\DomainBundle\Entity\Post;
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Exception\DomainException;
-use Blog\DomainBundle\Infrastructure\IRepository;
-use Blog\DomainBundle\Infrastructure\IUnitOfWork;
+use Blog\InfrastructureBundle\ORM\IRepository;
+use Blog\InfrastructureBundle\ORM\IUnitOfWork;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class PostService

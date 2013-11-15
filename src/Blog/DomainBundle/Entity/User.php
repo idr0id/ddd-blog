@@ -3,13 +3,13 @@
 namespace Blog\DomainBundle\Entity;
 
 use Blog\DomainBundle\Exception\DomainException;
-use Blog\DomainBundle\Infrastructure\IEntity;
+use Blog\InfrastructureBundle\ORM\IEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Blog\DomainBundle\Infrastructure\Doctrine\DoctrineGenericRepository")
+ * @ORM\Entity
  * @ORM\Table(name="user")
  */
 class User implements IEntity
