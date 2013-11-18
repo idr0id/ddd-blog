@@ -8,17 +8,11 @@ class ContainerTest extends IntegrationTestCaseBase
 {
 	public function testContains_UserService()
 	{
-		$this->assertInstanceOf(
-			'Blog\DomainBundle\Service\UserService',
-			$this->get('blog.domain.service.user')
-		);
+		$this->assertInstanceOf('Blog\DomainBundle\Service\UserService', $this->get('blog.domain.service.user'));
 	}
 
 	public function testContains_PostService()
 	{
-		$this->assertInstanceOf(
-			'Blog\DomainBundle\Service\PostService',
-			$this->get('blog.domain.service.post')
-		);
+		$this->assertInstanceOf('Blog\DomainBundle\Service\PostService', $this->get('blog.domain.service.post'));
 	}
 }
