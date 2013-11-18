@@ -52,7 +52,7 @@ class User implements IEntity
 		$this->passwordHash = md5($newPassword);
 	}
 
-	public function checkPassword($password)
+	public function isEqualPassword($password)
 	{
 		return $this->passwordHash === md5($password);
 	}
@@ -62,18 +62,23 @@ class User implements IEntity
 		if ($post->getAuthor() !== $this) {
 			throw new DomainException('Author is not allowed');
 		}
-		if ($this->posts->contains($post)) {
-			return;
+		if ($this->hasPost($post)) {
+			throw new DomainException('Post already added');
 		}
 		$this->posts->add($post);
 	}
 
 	public function removePost(Post $post)
 	{
-		if (!$this->posts->contains($post)) {
+		if (!$this->hasPost($post)) {
 			throw new DomainException('Post is not exists');
 		}
 		$this->posts->removeElement($post);
+	}
+
+	public function hasPost(Post $post)
+	{
+		return $this->posts->contains($post);
 	}
 
 	//<editor-fold desc="gets/sets">

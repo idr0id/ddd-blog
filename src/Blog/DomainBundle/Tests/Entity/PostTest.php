@@ -3,22 +3,26 @@
 namespace Blog\DomainBundle\Tests\Entity;
 
 use Blog\DomainBundle\Entity\Post;
+use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Tests\TestCaseBase;
-use Blog\DomainBundle\Tests\Utils\Entity\EntityFactory;
 
 class PostTest extends TestCaseBase
 {
-	public function testCreatePost()
+	public function testConstruct()
 	{
-		$author = EntityFactory::createUser();
-		$title = 'Some title!';
-		$text = 'Some looong text.';
-
-		$post = new Post($author, $title, $text);
-
-		$this->assertEquals($title, $post->getTitle());
-		$this->assertEquals($text, $post->getText());
+		// arrange
+		$author = $this->createAuthor();
+		// act
+		$post = new Post($author, 'Title of post', 'Text of post');
+		// assert
+		$this->assertEquals('Title of post', $post->getTitle());
+		$this->assertEquals('Text of post', $post->getText());
 		$this->assertSame($author, $post->getAuthor());
 		$this->assertTrue($author->getPosts()->contains($post));
+	}
+
+	private function createAuthor()
+	{
+		return new User('login', 'password');
 	}
 }
