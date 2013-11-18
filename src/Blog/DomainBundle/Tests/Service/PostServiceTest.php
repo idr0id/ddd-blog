@@ -2,70 +2,53 @@
 
 namespace Blog\DomainBundle\Tests\Service;
 
+use Blog\DomainBundle\Entity\Post;
+use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Service\PostService;
 use Blog\DomainBundle\Tests\BaseTestCase;
-use Blog\DomainBundle\Tests\Fakes\FakeUnitOfWork;
-use Blog\DomainBundle\Tests\Fakes\Repository\FakePostRepository;
-use Blog\DomainBundle\Tests\Utils\Entity\EntityFactory;
 
 class PostServiceTest extends BaseTestCase
 {
-	/**
-	 * @var PostService
-	 */
-	private $service;
-
-	protected function setUp()
-	{
-		$this->service = new PostService(new FakeUnitOfWork(), new FakePostRepository());
-	}
-
 	public function testCreate()
 	{
 		// arrange
-		$author = EntityFactory::createUser();
-		$title = 'Some text of title';
-		$text = 'Some text of post';
-
+		$service = $this->createPostService();
+		$author = new User('login', 'password');
 		// act
-		$post = $this->service->create($author, $title, $text);
-
+		$post = $service->create($author, 'Text of title', 'Text of post');
 		// assert
 		$this->assertInstanceOf('Blog\DomainBundle\Entity\Post', $post);
-		$this->assertInstanceOf('DateTime', $post->getCreated());
-		$this->assertEquals($title, $post->getTitle());
-		$this->assertEquals($text, $post->getText());
+		$this->assertEquals('Text of title', $post->getTitle());
+		$this->assertEquals('Text of post', $post->getText());
 		$this->assertSame($author, $post->getAuthor());
-		$this->assertTrue($author->getPosts()->contains($post));
 	}
 
 	public function testRemove()
 	{
 		// arrange
-		$author = EntityFactory::createUser();
-		$post = $this->service->create($author, 'Some text of title', 'Some text of post');
-
+		$service = $this->createPostService();
+		$author = $service->getPost(1)->getAuthor();
 		// act
-		$this->service->remove($post->getId());
-
+		$service->remove(1);
 		// assert
 		$this->assertEquals(0, $author->getPosts()->count());
 	}
 
 	public function testRemoveNonexistentShouldThrowException()
 	{
-		// arrange
 		$this->setExpectedException('Blog\DomainBundle\Exception\DomainException');
-
+		// arrange
+		$service = $this->createPostService();
 		// act
-		$this->service->remove(100500);
+		$service->remove(100500);
 	}
 
 	public function testGetAllPosts()
 	{
+		// arrange
+		$service = $this->createPostService();
 		// act
-		$posts = $this->service->getAllPosts();
-
+		$posts = $service->getAllPosts();
 		// assert
 		$this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $posts);
 		$this->assertContainsOnlyInstancesOf('Blog\DomainBundle\Entity\Post', $posts->getValues());
@@ -73,11 +56,28 @@ class PostServiceTest extends BaseTestCase
 
 	public function testGetPostById()
 	{
+		// arrange
+		$service = $this->createPostService();
 		// act
-		$post = $this->service->getPost(1);
-
+		$post = $service->getPost(1);
 		// assert
 		$this->assertInstanceOf('Blog\DomainBundle\Entity\Post', $post);
 		$this->assertEquals(1, $post->getId());
+	}
+
+	private function createPostService()
+	{
+		$unitOfWork = $this->getMockForAbstractClass('Blog\InfrastructureBundle\ORM\IUnitOfWork');
+		$repository = new FakeRepository('Blog\DomainBundle\Entity\Post', array(
+			$this->createPost('title 1', 'text 1'),
+			$this->createPost('title 2', 'text 2'),
+			$this->createPost('title 3', 'text 3'),
+		));
+		return new PostService($unitOfWork, $repository);
+	}
+
+	private function createPost($title, $text)
+	{
+		return new Post(new User('login', 'password'), $title, $text);
 	}
 }

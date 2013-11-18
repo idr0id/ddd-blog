@@ -45,7 +45,7 @@ class PostService
 	 */
 	public function getAllPosts()
 	{
-		return new ArrayCollection($this->postRepository->findAll());
+		return $this->postRepository->findAll();
 	}
 
 	/**
