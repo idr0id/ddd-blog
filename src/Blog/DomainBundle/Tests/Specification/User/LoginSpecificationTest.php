@@ -4,9 +4,9 @@ namespace Blog\DomainBundle\Tests\Specification\User;
 
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Specification\User\LoginSpecification;
-use Blog\DomainBundle\Tests\BaseIntegrationTestCate;
+use Blog\DomainBundle\Tests\IntegrationTestCaseBase;
 
-class LoginSpecificationTest extends BaseIntegrationTestCate
+class LoginSpecificationTest extends IntegrationTestCaseBase
 {
 	public function testSatisfiedIsShouldBeTrue()
 	{

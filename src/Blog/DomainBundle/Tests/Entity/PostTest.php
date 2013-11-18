@@ -3,10 +3,10 @@
 namespace Blog\DomainBundle\Tests\Entity;
 
 use Blog\DomainBundle\Entity\Post;
-use Blog\DomainBundle\Tests\BaseTestCase;
+use Blog\DomainBundle\Tests\TestCaseBase;
 use Blog\DomainBundle\Tests\Utils\Entity\EntityFactory;
 
-class PostTest extends BaseTestCase
+class PostTest extends TestCaseBase
 {
 	public function testCreatePost()
 	{

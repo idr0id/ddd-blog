@@ -5,9 +5,9 @@ namespace Blog\DomainBundle\Tests\Service;
 use Blog\DomainBundle\Entity\Post;
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Service\PostService;
-use Blog\DomainBundle\Tests\BaseTestCase;
+use Blog\DomainBundle\Tests\TestCaseBase;
 
-class PostServiceTest extends BaseTestCase
+class PostServiceTest extends TestCaseBase
 {
 	public function testCreate()
 	{

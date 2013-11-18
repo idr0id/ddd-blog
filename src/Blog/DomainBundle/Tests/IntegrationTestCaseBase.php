@@ -5,7 +5,7 @@ namespace Blog\DomainBundle\Tests;
 use Blog\InfrastructureBundle\ORM\IRepository;
 use Blog\DomainBundle\Tests\Utils\TestsEnvironment;
 
-class BaseIntegrationTestCate extends BaseTestCase
+class IntegrationTestCaseBase extends TestCaseBase
 {
 	/**
 	 * @var TestsEnvironment

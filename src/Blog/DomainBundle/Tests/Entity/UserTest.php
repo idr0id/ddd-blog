@@ -3,10 +3,10 @@
 namespace Blog\DomainBundle\Tests\Entity;
 
 use Blog\DomainBundle\Entity\User;
-use Blog\DomainBundle\Tests\BaseTestCase;
+use Blog\DomainBundle\Tests\TestCaseBase;
 use Blog\DomainBundle\Tests\Utils\Entity\EntityFactory;
 
-class UserTest extends BaseTestCase
+class UserTest extends TestCaseBase
 {
 	/**
 	 * @var User
