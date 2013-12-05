@@ -4,8 +4,8 @@ namespace Blog\DomainBundle\Tests\Utils;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\NullOutput;
 
 class TestsEnvironment
 {
@@ -15,43 +15,40 @@ class TestsEnvironment
 	private $runSilent;
 	private $output;
 
-	/**
-	 * @return TestsEnvironment
-	 */
-	public static function getInstance()
-	{
-		static $instance;
-		if ($instance === null) {
-			$instance = new self();
-		}
-		return $instance;
-	}
-
-	private function __construct()
+	public function __construct()
 	{
 		$this->kernel = $this->buildKernel();
 		$this->application = $this->buildApplication($this->kernel);
-		$this->runSilent(true);
+		$this->setSilent(true);
 	}
 
+	/**
+	 * @return \Symfony\Component\DependencyInjection\ContainerInterface
+	 */
 	public function getContainer()
 	{
 		return $this->kernel->getContainer();
 	}
 
+	/**
+	 * @param string $command
+	 * @param array $options
+	 * @param bool $once
+	 * @return $this
+	 */
 	public function addCommand($command, array $options = array(), $once = false)
 	{
 		$commandId = md5($command . implode('', $options) . intval($once));
 
-		if (array_key_exists($commandId, $this->commands)) {
-			return;
+		if (!array_key_exists($commandId, $this->commands)) {
+			$this->commands[$commandId] = array(
+				'options' => array_merge(array('command' => $command), $options),
+				'once' => $once,
+				'runCount' => 0,
+			);
 		}
 
-		$this->commands[$commandId] = array(
-			'options' => array_merge(array('command' => $command), $options),
-			'once' => $once,
-			'runCount' => 0,
-		);
+		return $this;
 	}
 
 	public function runCommands()
@@ -68,6 +65,16 @@ class TestsEnvironment
 
 			$command['runCount']++;
 		}
+		return $this;
+	}
+
+	public function setSilent($silent)
+	{
+		$this->runSilent = (bool)$silent;
+		$this->output = $this->runSilent
+			? new NullOutput()
+			: new ConsoleOutput();
+		return $this;
 	}
 
 	private function buildKernel()
@@ -83,14 +90,5 @@ class TestsEnvironment
 		$application = new Application($kernel);
 		$application->setAutoExit(false);
 		return $application;
-	}
-
-	public function runSilent($silent)
-	{
-		$this->runSilent = (bool)$silent;
-
-		$this->output = $this->runSilent
-			? new NullOutput()
-			: new ConsoleOutput();
 	}
 }

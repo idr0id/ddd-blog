@@ -8,22 +8,17 @@ use Blog\DomainBundle\Tests\Utils\TestsEnvironment;
 class IntegrationTestCaseBase extends TestCaseBase
 {
 	/**
-	 * @var TestsEnvironment
-	 */
-	private static $environment;
-
-	/**
 	 * @inheritdoc
 	 */
 	public static function setUpBeforeClass()
 	{
-		self::$environment = TestsEnvironment::getInstance();
-		self::$environment->runSilent(true);
-		self::$environment->addCommand("doctrine:schema:drop", array("--force" => true));
-		self::$environment->addCommand("doctrine:schema:create", array());
-		self::$environment->addCommand("cache:warmup", array(), true);
-		self::$environment->addCommand("doctrine:fixtures:load", array("--fixtures" => __DIR__ . "/DataFixtures"));
-		self::$environment->runCommands();
+		self::getEnvironment()
+			->setSilent(true)
+			->addCommand("doctrine:schema:drop", array("--force" => true))
+			->addCommand("doctrine:schema:create", array())
+			->addCommand("cache:warmup", array(), true)
+			->addCommand("doctrine:fixtures:load", array("--fixtures" => __DIR__ . "/DataFixtures"))
+			->runCommands();
 	}
 
 	/**
@@ -34,7 +29,7 @@ class IntegrationTestCaseBase extends TestCaseBase
 	 */
 	protected function get($service)
 	{
-		return self::$environment->getContainer()->get($service);
+		return self::getEnvironment()->getContainer()->get($service);
 	}
 
 	/**
@@ -46,5 +41,16 @@ class IntegrationTestCaseBase extends TestCaseBase
 	protected function getRepository($entityName)
 	{
 		return $this->get(sprintf("blog.domain.repository.%s", strtolower($entityName)));
+	}
+
+	/**
+	 * Returns test environment util
+	 *
+	 * @return TestsEnvironment
+	 */
+	private static function getEnvironment()
+	{
+		static $environment;
+		return $environment ?: $environment = new TestsEnvironment();
 	}
 }
